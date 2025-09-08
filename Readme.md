@@ -1,78 +1,40 @@
-# Herramienta de Compras Optimizadas
+# HiperCompras
 
-## Objetivo del Proyecto  
-Desarrollar una herramienta integral para que organizaciones sociales optimicen sus compras de alimentos, reduciendo costos en los comedores populares donde brindan alimentos de manera gratuita. Esta herramienta permitirá:  
-1. **Procesar presupuestos de proveedores**, incluso si están en formatos no estructurados.  
-2. **Extraer información de ofertas disponibles en la web** para obtener precios actualizados y comparables.  
-3. **Realizar análisis y optimización** para seleccionar la mejor combinación de productos, marcas y presentaciones según precio, calidad y disponibilidad.  
+Este proyecto busca recomendar la mejor opción de compra de una canasta de productos, considerando la ubicación del usuario, precios de distintos proveedores y las promociones disponibles.
 
-El proyecto se estructura en dos grandes módulos: **Procesamiento de Presupuestos (OCR)** y **Extracción de Datos Web (Web Scraping)**, con la posibilidad de disponibilizar la información a través de una API.  
+## 🚀 Objetivo MVP
+- Definir un modelo de datos para productos, proveedores y promociones.
+- Implementar algoritmo de optimización que seleccione el proveedor óptimo.
+- Analizar impacto de promociones en el costo total.
+- Generar reportes comparativos.
 
----
+Épica 1 – Configuración e Infraestructura
+  Historia 1.1: Configurar entorno de desarrollo (requirements.txt/poetry, Docker opcional).
+  Historia 1.2: Definir modelo de datos para productos, precios, ubicaciones y promociones.
+  Historia 1.3: Scripting para cargar dataset inicial de proveedores y productos consumiendo los CSV de SEPA.
+  
+Épica 2 – Búsqueda y Optimización
+  Historia 2.1: Implementar algoritmo para obtener precios de un producto por proveedor.
+  Historia 2.2: Implementar cálculo de costo total de una canasta en cada proveedor.
+  Historia 2.3: Implementar selección de proveedor óptimo en función de la ubicación (ejemplo: menor distancia + costo total).
 
-## Módulo 1: Procesamiento de Presupuestos (OCR)  
+Épica 3 – Análisis de Promociones
+  Historia 3.1: Modelar diferentes tipos de promociones (2x1, descuentos por volumen, % off).
+  Historia 3.2: Crear Script que recorra y consolide las promociones de bancos, tarjetas y billeteras virtuales.
+  Historia 3.3: Incluir promociones en el cálculo de costo de la canasta.
+  Historia 3.4: Comparar ahorro con y sin promociones.
 
-### Objetivo  
-Permitir que presupuestos en formatos variados (PDFs, imágenes escaneadas, etc.) puedan ser sistematizados y utilizados para comparar precios y optimizar decisiones de compra.
-
-### Estado Actual  
-- Investigación inicial sobre herramientas OCR.  
-- Identificación de casos de uso comunes y formatos de presupuesto.  
-
-### Próximos Pasos  
-1. **Selección de tecnología OCR:** Evaluar herramientas como Tesseract, AWS Textract, u otras alternativas.  
-2. **Estandarización de datos:** Diseñar un esquema de datos que permita estructurar la información extraída.  
-3. **Desarrollo del pipeline OCR:** Crear un script que automatice la extracción, limpieza y almacenamiento de datos de presupuestos.  
-4. **Pruebas y ajuste iterativo:** Realizar pruebas con presupuestos reales y ajustar el procesamiento según los formatos comunes.  
-
----
-
-## Módulo 2: Extracción de Datos Web (Web Scraping)  
-
-### Objetivo  
-Automatizar la extracción de ofertas de productos desde sitios web de supermercados para comparar precios y mantener información actualizada.  
-
-### Estado Actual  
-- **Desarrollado:**  
-  - Script de web scraping para la cadena de supermercados **Diarco** utilizando Selenium.  
-  - Obtención de datos básicos de ofertas de productos.  
-
-### Próximos Pasos  
-1. **Ampliación del scraping actual:**  
-   - Crear un sistema para recorrer automáticamente las sucursales de Diarco.  
-   - Guardar los datos obtenidos en un archivo CSV como primer paso hacia la estructuración.  
-2. **Exploración de nuevas fuentes:**  
-   - Identificar y mapear otras cadenas de supermercados con información de ofertas disponibles en la web.  
-   - Desarrollar scripts para estas nuevas cadenas y unificar la estructura de datos obtenidos.  
-3. **Integración con una base de datos:**  
-   - Evaluar si es más adecuado utilizar PostgreSQL o una base de datos NoSQL, dependiendo de la naturaleza de los datos y el volumen esperado.  
-   - Diseñar y configurar la base de datos seleccionada para un acceso más eficiente y organizado.  
-4. **Optimización matemática:**  
-   - Implementar un algoritmo que permita comparar precios de distintos supermercados y optimizar la elección de compras para una canasta específica de productos.  
-
----
-
-## Disponibilización de la Información mediante una API  
-
-### Tecnología Propuesta  
-- **Framework:** FastAPI para desarrollar la API de manera eficiente y escalable.  
-- **Base de Datos:** Por evaluar, considerando PostgreSQL como una opción relacional o una alternativa NoSQL en función del rendimiento y la flexibilidad requeridos.  
-
-### Pasos a Seguir  
-1. Definir las rutas y endpoints necesarios para acceder a los datos procesados (ofertas, presupuestos y análisis de optimización).  
-2. Implementar los endpoints para realizar consultas filtradas según parámetros específicos (producto, marca, proveedor, entre otros).  
-3. Asegurar la correcta integración entre los módulos OCR y Web Scraping con la API.  
-4. Documentar la API utilizando herramientas como Swagger para facilitar su uso por parte de terceros.  
+Épica 4 – Visualizaciones (A analizar)
+  Historia 4.1: Generar reporte de proveedor óptimo con desglose de costos.
+  Historia 4.2: Gráfico comparativo de precios de la canasta entre proveedores.
+  Historia 4.3: Mostrar impacto de promociones en costo total.
 
 ---
 
 ## Tecnologías Utilizadas  
 
-- **Lenguaje:** Python.  
-- **Librerías para OCR y Web Scraping:** Selenium, BeautifulSoup, Tesseract (o alternativa seleccionada).  
+- **Lenguaje:** Python.
+- **Fuente de Datos:** PRECIOS CLAROS SEPA
 - **Framework de API:** FastAPI.  
-- **Base de Datos:** Por definir entre PostgreSQL o una base NoSQL.  
+- **Base de Datos:** PostgreSQL
 
----
-
-Con esta estructura, buscamos construir una herramienta eficiente y escalable que optimice el impacto de los comedores populares en sus comunidades. ¡Manos a la obra!  
